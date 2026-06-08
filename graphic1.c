@@ -126,6 +126,27 @@ void drawTriangle(int row, int col, int height)
     }
 }
 
+void drawCircle(int cx, int cy, int radius)
+{
+    int x, y;
+
+    for(y = 0; y < ROWS; y++)
+    {
+        for(x = 0; x < COLS; x++)
+        {
+            int dx = x - cx;
+            int dy = y - cy;
+            int d = dx * dx + dy * dy;
+
+            if(d >= radius * radius - radius &&
+               d <= radius * radius + radius)
+            {
+                data[y][x] = '*';
+            }
+        }
+    }
+}
+
 int main()
 {
     int choice;
@@ -140,6 +161,9 @@ int main()
         printf("2.Draw Line\n");
         printf("3.Draw Rectangle\n"); 
         printf("4.Draw Triangle\n"); 
+        printf("5.Display Circle\n"); 
+        printf("6. Display Image\n");
+
         printf("Enter Choice: ");
         scanf("%d", &choice);
 
@@ -180,13 +204,29 @@ int main()
 
                 drawTriangle(row, col, height);
                 break;
-            }    
+            }  
 
+            case 5:
+            {
+                int cx, cy, radius;
+
+                printf("Enter centerX centerY radius: ");
+                scanf("%d%d%d", &cx, &cy, &radius);
+
+                drawCircle(cx, cy, radius);
+                break;
+            }
+            case 6:
+            {
+                displayimage();
+                break;
+            }
             default:
-                printf("Invalid Choice\n");
+                printf("Invalid choice!\n");
+                break;
         }
 
-    } while(choice != 0);
+    }while(choice != 0);
 
-    return 0;
-}
+        return 0;
+    }
