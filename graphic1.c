@@ -147,6 +147,38 @@ void drawCircle(int cx, int cy, int radius)
     }
 }
 
+void eraseArea(int x, int y, int width, int height)
+{
+    int i, j;
+
+    for(i = y; i < y + height && i < ROWS; i++)
+    {
+        for(j = x; j < x + width && j < COLS; j++)
+        {
+            if(i >= 0 && j >= 0)
+            {
+                data[i][j] = ' ';
+            }
+        }
+    }
+}
+
+void modifyRectangle()
+{
+    int oldx, oldy, oldw, oldh;
+    int newx, newy, neww, newh;
+
+    printf("Enter old rectangle x y width height: ");
+    scanf("%d%d%d%d", &oldx, &oldy, &oldw, &oldh);
+
+    eraseArea(oldx, oldy, oldw, oldh);
+
+    printf("Enter new rectangle x y width height: ");
+    scanf("%d%d%d%d", &newx, &newy, &neww, &newh);
+
+    drawRectangle(newx, newy, neww, newh);
+}
+
 int main()
 {
     int choice;
@@ -163,6 +195,8 @@ int main()
         printf("4.Draw Triangle\n"); 
         printf("5.Display Circle\n"); 
         printf("6. Display Image\n");
+        printf("7. Delete Object\n");
+        printf("8. Modify Rectangle\n");
 
         printf("Enter Choice: ");
         scanf("%d", &choice);
@@ -221,12 +255,31 @@ int main()
                 displayimage();
                 break;
             }
-            default:
+
+            case 7:
+            {
+                int x, y, width, height;
+
+                printf("Enter x y width height to erase: ");
+                scanf("%d%d%d%d", &x, &y, &width, &height);
+
+                eraseArea(x, y, width, height);
+                break;
+            }
+
+             case 8:
+            {
+                modifyRectangle();
+                break;
+            }
+             default:
                 printf("Invalid choice!\n");
                 break;
         }
 
     }while(choice != 0);
+                
+
 
         return 0;
     }
