@@ -1,0 +1,256 @@
+2D GRAPHICS EDITOR PROJECT
+PROMPTS AND RESPONSES USED
+
+PROMPT 1
+Create a C program for a 2D graphics editor using a 2D character array.
+
+Response:
+
+A 2D graphics editor can be implemented using a character array where each position represents a pixel. Blank spaces represent empty areas and '*' characters represent drawings.
+
+PROMPT 2
+
+
+Create a blank canvas using a 2D character array.
+
+Response:
+
+Code:
+
+#include <stdio.h>
+
+#define ROWS 25
+#define COLS 80
+
+char data[ROWS][COLS];
+
+void initializedata()
+{
+    int i,j;
+
+    for(i=0;i<ROWS;i++)
+    {
+        for(j=0;j<COLS;j++)
+        {
+            data[i][j]=' ';
+        }
+    }
+}
+
+PROMPT 3
+Write a function to display the image.
+
+Response:
+
+Code:
+
+void displayimage()
+{
+    int i,j;
+
+    for(i=0;i<ROWS;i++)
+    {
+        for(j=0;j<COLS;j++)
+        {
+            printf("%c",data[i][j]);
+        }
+
+        printf("\n");
+    }
+}
+
+
+PROMPT 4
+
+Write a function to draw a straight line.
+
+Response:
+
+Code:
+
+void drawStraightline(int x1,int y1,int x2,int y2)
+{
+    int i;
+
+    if(x1==x2)
+    {
+        for(i=y1;i<=y2;i++)
+        {
+            data[i][x1]='*';
+        }
+    }
+    else if(y1==y2)
+    {
+        for(i=x1;i<=x2;i++)
+        {
+            data[y1][i]='*';
+        }
+    }
+}
+
+PROMPT 5
+Write a function to draw a rectangle.
+
+Response:
+
+Code:
+
+void drawRectangle(int x,int y,int width,int height)
+{
+    int i;
+
+    for(i=x;i<x+width;i++)
+    {
+        data[y][i]='*';
+        data[y+height-1][i]='*';
+    }
+
+    for(i=y;i<y+height;i++)
+    {
+        data[i][x]='*';
+        data[i][x+width-1]='*';
+    }
+}
+
+PROMPT 6
+
+
+Write a function to draw a triangle.
+
+Response:
+
+Code:
+
+void drawTriangle(int row,int col,int height)
+{
+    int i,j;
+
+    for(i=0;i<height;i++)
+    {
+        for(j=col-i;j<=col+i;j++)
+        {
+            if(i==height-1 ||
+               j==col-i ||
+               j==col+i)
+            {
+                data[row+i][j]='*';
+            }
+        }
+    }
+}
+
+PROMPT 7
+
+Write a function to draw a circle.
+
+Response:
+
+Code:
+
+void drawCircle(int cx,int cy,int radius)
+{
+    int x,y;
+
+    for(y=0;y<ROWS;y++)
+    {
+        for(x=0;x<COLS;x++)
+        {
+            int dx=x-cx;
+            int dy=y-cy;
+            int d=dx*dx+dy*dy;
+
+            if(d>=radius*radius-radius &&
+               d<=radius*radius+radius)
+            {
+                data[y][x]='*';
+            }
+        }
+    }
+}
+
+PROMPT 8
+
+Create a menu driven program using switch case.
+
+Response:
+
+Code:
+
+printf("1. Display Image\n");
+printf("2. Draw Line\n");
+printf("3. Draw Rectangle\n");
+printf("4. Draw Triangle\n");
+printf("5. Draw Circle\n");
+
+PROMPT 9
+
+Write a function to delete objects from the image.
+
+Response:
+
+Code:
+
+void eraseArea(int x,int y,int width,int height)
+{
+    int i,j;
+
+    for(i=y;i<y+height;i++)
+    {
+        for(j=x;j<x+width;j++)
+        {
+            data[i][j]=' ';
+        }
+    }
+}
+
+PROMPT 10
+
+Write a function to modify objects in the image.
+
+Response:
+
+Code:
+
+void modifyRectangle()
+{
+    int oldx,oldy,oldw,oldh;
+    int newx,newy,neww,newh;
+
+    eraseArea(oldx,oldy,oldw,oldh);
+
+    drawRectangle(newx,newy,neww,newh);
+}
+
+PROMPT 11
+
+How to complete the project in 5 days with daily GitHub commits?
+
+Response:
+
+Day 1:
+Create 2D array and display function.
+
+Day 2:
+Add line drawing function.
+
+Day 3:
+Add rectangle and triangle functions.
+
+Day 4:
+Add circle function.
+
+Day 5:
+Add delete and modify operations.
+
+PROJECT FEATURES
+
+1. Draw Line
+2. Draw Rectangle
+3. Draw Triangle
+4. Draw Circle
+5. Add Objects
+6. Delete Objects
+7. Modify Objects
+8. Display Image
+9. Store Image Using 2D Character Array
+
